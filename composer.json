@@ -17,12 +17,12 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "tnmdev/msisdn-helpers": "^1.2",
-        "laravel/framework": "^8.73",
         "adldap2/adldap2-laravel": "^6.1"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "laravel/framework": "^8.73"
     },
     "autoload": {
         "psr-4": {
