@@ -27,11 +27,15 @@ class LDAPAuthenticationService implements IAuthenticationService
 
         $result = $this->provider->search()->where('samaccountname', '=', $username)->first();
 
+        $msisdn = $result->getFirstAttribute('telephonenumber')
+            ? msisdn($result->getFirstAttribute('telephonenumber'))->humanize()
+            : null;
+
         return new AuthenticationResponse(
             $result->getAccountName(),
             $result->getName(),
             $result->getFirstAttribute('mail'),
-            msisdn($result->getFirstAttribute('telephonenumber'))->humanize(),
+            $msisdn,
             $result->getFirstAttribute('title')
         );
     }

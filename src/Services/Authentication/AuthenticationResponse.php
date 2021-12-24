@@ -7,10 +7,15 @@ class AuthenticationResponse
     private string $username;
     private string $name;
     private string $email;
-    private string $phoneNumber;
+    private ?string $phoneNumber;
     private ?string $position;
 
-    public function __construct(string $username, string $name, string $email, string $phoneNumber, ?string $position = null)
+    public function __construct(
+        string $username,
+        string $name,
+        string $email,
+        ?string $phoneNumber = null,
+        ?string $position = null)
     {
         $this->username = $username;
         $this->name = $name;
