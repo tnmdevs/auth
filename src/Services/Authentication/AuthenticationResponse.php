@@ -6,14 +6,14 @@ class AuthenticationResponse
 {
     private string $username;
     private string $name;
-    private string $email;
+    private ?string $email;
     private ?string $phoneNumber;
     private ?string $position;
 
     public function __construct(
         string $username,
         string $name,
-        string $email,
+        ?string $email,
         ?string $phoneNumber = null,
         ?string $position = null)
     {
@@ -45,12 +45,12 @@ class AuthenticationResponse
         return $this->name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
