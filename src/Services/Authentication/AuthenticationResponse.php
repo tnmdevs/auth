@@ -5,14 +5,14 @@ namespace TNM\Auth\Services\Authentication;
 class AuthenticationResponse
 {
     private string $username;
-    private string $name;
+    private ?string $name;
     private ?string $email;
     private ?string $phoneNumber;
     private ?string $position;
 
     public function __construct(
         string $username,
-        string $name,
+        ?string $name,
         ?string $email,
         ?string $phoneNumber = null,
         ?string $position = null)
@@ -40,7 +40,7 @@ class AuthenticationResponse
         return $this->username;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
