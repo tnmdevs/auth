@@ -2,38 +2,42 @@
 
 namespace TNM\Auth\Services\Authentication;
 
-use Adldap\AdldapException;
-use Adldap\AdldapInterface;
-use Adldap\Connections\ProviderInterface;
+use LdapRecord\Auth\PasswordRequiredException;
+use LdapRecord\Auth\UsernameRequiredException;
+use LdapRecord\Container;
+use LdapRecord\Models\ActiveDirectory\User;
 
 class LDAPAuthenticationService implements IAuthenticationService
 {
-    private ProviderInterface $provider;
-
     /**
-     * @throws AdldapException
+     * @throws UsernameRequiredException
+     * @throws PasswordRequiredException
      */
-    public function __construct()
-    {
-        $ldap = app(AdldapInterface::class);
-        $this->provider = $ldap->getDefaultProvider();
-    }
-
     public function authenticate(string $username, string $password): ?AuthenticationResponse
     {
-        $authenticated = $this->provider->getGuard()->attempt($username, $password);
+        $connection = (new Container)->getDefaultConnection();
 
-        if (!$authenticated) return null;
+        $authenticated = $connection->auth()->attempt($username, $password);
 
-        $result = $this->provider->search()->where('samaccountname', '=', $username)->first();
+        if (!$authenticated) {
+            return null;
+        }
 
-        $msisdn = $result->getFirstAttribute('telephonenumber')
-            ? msisdn($result->getFirstAttribute('telephonenumber'))->humanize()
+        $result = (new User)->whereEquals('samaccountname', $username)->first();
+
+        if (!$result) {
+            return null;
+        }
+
+        $phone = $result->getFirstAttribute('telephonenumber');
+
+        $msisdn = $phone
+            ? msisdn($phone)->humanize()
             : null;
 
         return new AuthenticationResponse(
-            $result->getAccountName(),
-            $result->getName(),
+            $result->getFirstAttribute('samaccountname'),
+            $result->getFirstAttribute('cn'),
             $result->getFirstAttribute('mail'),
             $msisdn,
             $result->getFirstAttribute('title')
