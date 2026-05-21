@@ -1,44 +1,44 @@
 {
-    "name": "tnmdev/auth",
-    "description": "Auth provider",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "TNM Developers",
-            "email": "developers@tnm.co.mw"
-        }
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
-    },
-    "require": {
-        "php": "^7.4 || ^8.0",
-        "tnmdev/msisdn-helpers": "^1.2",
-        "adldap2/adldap2-laravel": "^6.1"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.5",
-        "laravel/framework": "^8.73"
-    },
-    "autoload": {
-        "psr-4": {
-            "TNM\\Auth\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "TNM\\Auth\\Tests\\": "tests"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "TNM\\Auth\\AuthServiceProvider"
-            ]
-        }
+  "name": "tnmdev/auth",
+  "description": "Auth provider",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "TNM Developers",
+      "email": "developers@tnm.co.mw"
     }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "php": "^8.1 || ^8.2 || ^8.3",
+    "tnmdev/msisdn-helpers": "^1.2",
+    "adldap2/adldap2-laravel": "^6.1"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^8.0",
+    "phpunit/phpunit": "^10.0",
+    "laravel/framework": "^10.0 || ^11.0 || ^12.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "TNM\\Auth\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TNM\\Auth\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "TNM\\Auth\\AuthServiceProvider"
+      ]
+    }
+  }
 }
