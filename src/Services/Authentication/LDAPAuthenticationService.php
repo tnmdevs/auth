@@ -15,7 +15,7 @@ class LDAPAuthenticationService implements IAuthenticationService
      */
     public function authenticate(string $username, string $password): ?AuthenticationResponse
     {
-        $connection = (new Container)->getDefaultConnection();
+        $connection = Container::getDefaultConnection();
 
         $authenticated = $connection->auth()->attempt($username, $password);
 
